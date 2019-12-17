@@ -1,13 +1,13 @@
-package com.example.expeditiouscopyorderapp.ui.myPage
+package com.jaeyeon.expeditiouscopyorderapp.ui.myPrint
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class MyPageViewModel : ViewModel() {
+class MyPrintViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is my page Fragment"
+        value = "This is my print Fragment"
     }
     val text: LiveData<String> = _text
 }

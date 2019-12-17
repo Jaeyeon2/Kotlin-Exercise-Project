@@ -1,4 +1,4 @@
-package com.example.expeditiouscopyorderapp
+package com.jaeyeon.expeditiouscopyorderapp
 
 import org.junit.Test
 

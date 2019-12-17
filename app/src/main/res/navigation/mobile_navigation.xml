@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_mySurrounding"
-        android:name="com.example.expeditiouscopyorderapp.ui.mySurrounding.MySurroundingFragment"
+        android:name="com.jaeyeon.expeditiouscopyorderapp.ui.mySurrounding.MySurroundingFragment"
         android:label="@string/title_mySurroing"
         tools:layout="@layout/fragment_my_surrounding" />
 
     <fragment
         android:id="@+id/navigation_shopList"
-        android:name="com.example.expeditiouscopyorderapp.ui.shopList.ShopListFragment"
+        android:name="com.jaeyeon.expeditiouscopyorderapp.ui.shopList.ShopListFragment"
         android:label="@string/title_shopList"
         tools:layout="@layout/fragment_shop_list" />
 
     <fragment
         android:id="@+id/navigation_myPrint"
-        android:name="com.example.expeditiouscopyorderapp.ui.myPrint.MyPrintFragment"
+        android:name="com.jaeyeon.expeditiouscopyorderapp.ui.myPrint.MyPrintFragment"
         android:label="@string/title_myPrint"
         tools:layout="@layout/fragment_my_print" />
 
     <fragment
         android:id="@+id/navigation_myPage"
-        android:name="com.example.expeditiouscopyorderapp.ui.myPage.MyPageFragment"
+        android:name="com.jaeyeon.expeditiouscopyorderapp.ui.myPage.MyPageFragment"
         android:label="@string/title_myPage"
         tools:layout="@layout/fragment_my_page"/>
 </navigation>

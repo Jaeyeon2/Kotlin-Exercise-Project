@@ -1,13 +1,13 @@
-package com.example.expeditiouscopyorderapp.ui.shopList
+package com.jaeyeon.expeditiouscopyorderapp.ui.myPage
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ShopListViewModel : ViewModel() {
+class MyPageViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is shop list Fragment"
+        value = "This is my page Fragment"
     }
     val text: LiveData<String> = _text
 }

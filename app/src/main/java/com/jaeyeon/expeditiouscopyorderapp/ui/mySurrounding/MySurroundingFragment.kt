@@ -1,4 +1,4 @@
-package com.example.expeditiouscopyorderapp.ui.mySurrounding
+package com.jaeyeon.expeditiouscopyorderapp.ui.mySurrounding
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.expeditiouscopyorderapp.R
+import com.jaeyeon.expeditiouscopyorderapp.R
 
 class MySurroundingFragment : Fragment() {
 
@@ -22,10 +22,10 @@ class MySurroundingFragment : Fragment() {
         mySurroundingViewModel =
             ViewModelProviders.of(this).get(MySurroundingViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_my_surrounding, container, false)
-        val textView: TextView = root.findViewById(R.id.text_surrounding)
-        mySurroundingViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
+        //val textView: TextView = root.findViewById(R.id.text_surrounding)
+        //mySurroundingViewModel.text.observe(this, Observer {
+        //    textView.text = it
+        //})
         return root
     }
 }

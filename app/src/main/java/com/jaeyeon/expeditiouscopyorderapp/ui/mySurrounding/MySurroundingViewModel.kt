@@ -1,4 +1,4 @@
-package com.example.expeditiouscopyorderapp.ui.mySurrounding
+package com.jaeyeon.expeditiouscopyorderapp.ui.mySurrounding
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
