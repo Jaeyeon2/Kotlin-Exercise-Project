@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Expeditious Copy Order App</string>
+    <string name="title_mySurroing">내 주변</string>
+    <string name="title_shopList">복사점 목록</string>
+    <string name="title_myPrint">복사 내역</string>
+    <string name="title_myPage">마이 페이지</string>
+</resources>
