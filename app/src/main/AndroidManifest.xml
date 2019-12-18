@@ -23,4 +23,6 @@
             android:value="wwwe6pi0o4" />
     </application>
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
 </manifest>
