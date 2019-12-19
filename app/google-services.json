@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "588969482617",
+    "firebase_url": "https://print-order-service.firebaseio.com",
+    "project_id": "print-order-service",
+    "storage_bucket": "print-order-service.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588969482617:android:127ea5fd824af6224af7a8",
+        "android_client_info": {
+          "package_name": "com.jaeyeon.expeditiouscopyorderapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588969482617-li0c66k15to9o7svpbsiio0a2jq97p3o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoZVagi65qtKCxMnZG-vfSvch9W27F12g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "588969482617-li0c66k15to9o7svpbsiio0a2jq97p3o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -22,10 +22,6 @@ class MyPageFragment : Fragment() {
         myPageViewModel =
             ViewModelProviders.of(this).get(MyPageViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_my_page, container, false)
-        val textView: TextView = root.findViewById(R.id.text_myPage)
-        myPageViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
         return root
     }
 }

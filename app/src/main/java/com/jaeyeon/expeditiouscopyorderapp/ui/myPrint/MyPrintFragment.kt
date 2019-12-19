@@ -22,10 +22,6 @@ class MyPrintFragment : Fragment() {
         myPrintViewModel =
             ViewModelProviders.of(this).get(MyPrintViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_my_print, container, false)
-        val textView: TextView = root.findViewById(R.id.text_myPrint)
-        myPrintViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
         return root
     }
 }

@@ -1,11 +1,18 @@
 package com.jaeyeon.expeditiouscopyorderapp.ui.mySurrounding
 
+import android.content.Context.LOCATION_SERVICE
+import android.content.DialogInterface
+import android.content.Intent
+import android.location.LocationManager
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.UiThread
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -58,11 +65,14 @@ class MySurroundingFragment : Fragment(), OnMapReadyCallback {
         val uiSettings = naverMap.uiSettings
         uiSettings.isZoomControlEnabled = false
         naverMap.locationSource = locationSource
-        naverMap.locationTrackingMode = LocationTrackingMode.Follow
+        naverMap.locationTrackingMode = LocationTrackingMode.Face
 
     }
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }
+
+
+
 }

@@ -22,10 +22,6 @@ class ShopListFragment : Fragment() {
         shopListViewModel =
             ViewModelProviders.of(this).get(ShopListViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_shop_list, container, false)
-        val textView: TextView = root.findViewById(R.id.text_shopList)
-        shopListViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
         return root
     }
 }
