@@ -7,6 +7,8 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -17,10 +19,18 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     internal var REQUIRED_PERMISSIONS = arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+
+    companion object {
+        private val LOCATION_PERMISSION_REQUEST_CODE = 1000
+        private val GPS_ENABLE_REQUEST_CODE = 2001
+        private val PERMISSIONS_REQUEST_CODE = 100
+        var accUserEmail = ""
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             checkRunTimePermission()
         }
+        onStart()
     }
     fun checkLocationServicesStatus(): Boolean {
         val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
@@ -113,17 +124,24 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    companion object {
-        private val LOCATION_PERMISSION_REQUEST_CODE = 1000
-        private val GPS_ENABLE_REQUEST_CODE = 2001
-        private val PERMISSIONS_REQUEST_CODE = 100
-    }
-
     public override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
-        //updateUI(currentUser)
+        Log.d("currentUser22", currentUser.toString())
+        updateUI(currentUser)
+    }
+
+
+    private fun updateUI(user: FirebaseUser?) {
+        //hideProgressDialog()
+        if (user != null) {
+            Log.d("접속한 사용자 이메일", user.email.toString())
+            accUserEmail = user.email.toString()
+        } else {
+            Log.d("", "등록된 사용자 정보 없음")
+            accUserEmail = "noLogin"
+        }
     }
 
 }

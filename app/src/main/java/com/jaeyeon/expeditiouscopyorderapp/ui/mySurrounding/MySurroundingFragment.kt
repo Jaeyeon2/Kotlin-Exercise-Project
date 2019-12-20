@@ -64,6 +64,7 @@ class MySurroundingFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(naverMap: NaverMap) {
         val uiSettings = naverMap.uiSettings
         uiSettings.isZoomControlEnabled = false
+        uiSettings.isCompassEnabled = false
         naverMap.locationSource = locationSource
         naverMap.locationTrackingMode = LocationTrackingMode.Face
 

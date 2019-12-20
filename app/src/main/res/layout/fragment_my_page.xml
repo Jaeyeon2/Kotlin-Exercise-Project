@@ -14,7 +14,8 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_page_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"/>
+        android:layout_height="48dp"
+        android:background="#ffffff"/>
 
         <TextView
             android:layout_gravity="center"
@@ -44,6 +45,8 @@
         android:background="#c3c3c3"/>
 
     <LinearLayout
+        android:background="#ffffff"
+        android:id="@+id/my_page_userInformation"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.5"
@@ -55,7 +58,7 @@
             android:layout_weight="3.5"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="10dp">
+            android:padding="12dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/my_page_userImage"
@@ -80,6 +83,8 @@
                 android:layout_weight="7"
                 android:layout_height="match_parent">
 
+
+
             <TextView
                 android:id="@+id/my_page_userNickname"
                 android:layout_width="wrap_content"
@@ -102,8 +107,15 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="3"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="25dp">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/right_arrow_gray"
+                    />
 
             </LinearLayout>
 
@@ -111,7 +123,211 @@
 
         </LinearLayout>
 
+    </LinearLayout
+>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="#c3c3c3"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.0"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:background="#ffffff">
+
+        <LinearLayout
+            android:id="@+id/my_page_alarm"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:orientation="vertical"
+                android:gravity="center">
+
+            <ImageView
+                android:paddingLeft="31dp"
+                android:paddingTop="31dp"
+                android:paddingRight="31dp"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="6.0"
+
+                android:src="@drawable/alarm"/>
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:text="내 알림"
+                android:textSize="14sp"
+                android:textColor="#c3c3c3"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_gravity="center"
+            android:layout_width="0.3dp"
+            android:layout_height="45dp"
+            android:background="#c3c3c3"/>
+
+        <LinearLayout
+            android:id="@+id/my_page_myPrint"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:paddingLeft="31dp"
+                    android:paddingTop="31dp"
+                    android:paddingRight="31dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="6.0"
+
+                    android:src="@drawable/my_print"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:text="복사 내역"
+                    android:textSize="14sp"
+                    android:textColor="#c3c3c3"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_gravity="center"
+            android:layout_width="0.3dp"
+            android:layout_height="45dp"
+            android:background="#c3c3c3"/>
+
+
+
+        <LinearLayout
+            android:id="@+id/my_page_favShop"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:paddingLeft="31dp"
+                    android:paddingTop="31dp"
+                    android:paddingRight="31dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="6.0"
+
+                    android:src="@drawable/star"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:text="찜한 복사점"
+                    android:textSize="14sp"
+                    android:textColor="#c3c3c3"/>
+
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:layout_gravity="center"
+            android:layout_width="0.3dp"
+            android:layout_height="45dp"
+            android:background="#c3c3c3"/>
+
+
+        <LinearLayout
+            android:id="@+id/my_page_setting"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:paddingLeft="31dp"
+                    android:paddingTop="31dp"
+                    android:paddingRight="31dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="6.0"
+
+                    android:src="@drawable/setting"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:text="설정"
+                    android:textSize="14sp"
+                    android:textColor="#c3c3c3"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="#c3c3c3"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.17"
+        android:background="#f1f1f1">
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6.148"
+        android:background="#ffffff">
+    </LinearLayout>
+
+
+
+
 
 
 
