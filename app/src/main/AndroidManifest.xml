@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.myPage.LoginActivity"></activity>
+        <activity android:name=".ui.myPage.SignupActivity"></activity>
+        <activity android:name=".ui.myPage.LoginActivity" />
         <activity android:name=".ui.myPage.FirebaseUIActivity" />
         <activity
             android:name=".MainActivity"
