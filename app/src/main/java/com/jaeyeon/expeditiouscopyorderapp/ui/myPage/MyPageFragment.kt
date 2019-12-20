@@ -1,10 +1,12 @@
 package com.jaeyeon.expeditiouscopyorderapp.ui.myPage
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -27,13 +29,16 @@ class MyPageFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_my_page, container, false)
         val tv_userNickname = root.findViewById<TextView>(R.id.my_page_userNickname)
         val tv_userWelcome = root.findViewById<TextView>(R.id.my_page_welcome)
+        val ll_userInfor = root.findViewById<LinearLayout>(R.id.my_page_userInformation)
         if(MainActivity.accUserEmail.equals("noLogin")) {
             tv_userNickname.text = "등록된 계정이 없습니다."
             tv_userWelcome.visibility = INVISIBLE
+            ll_userInfor.setOnClickListener {
+                val loginIntent = Intent(context, LoginActivity::class.java);
+                startActivity(loginIntent)
+            }
         } else {
-
         }
-
         return root
     }
 
