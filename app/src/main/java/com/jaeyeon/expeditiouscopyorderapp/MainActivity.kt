@@ -64,6 +64,9 @@ class MainActivity : AppCompatActivity(){
             {
                 Log.d("request_page", "SignupActivity")
                 navView.selectedItemId = R.id.navigation_myPage
+            } else if(getIntent().getStringExtra("request_page").equals("UserInformation_logout"))
+            {
+                navView.selectedItemId = R.id.navigation_myPage
             }
         }
     }

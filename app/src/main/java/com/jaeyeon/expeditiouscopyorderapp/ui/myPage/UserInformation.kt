@@ -15,6 +15,10 @@ class UserInformation : AppCompatActivity(), View.OnClickListener {
     private lateinit var tv_logout: TextView
     private lateinit var tv_withdrawal: TextView
     val user = FirebaseAuth.getInstance().currentUser
+    lateinit var name: String
+    lateinit var email: String
+    lateinit var photoUrl: String
+    lateinit var emailVerified: String
     private val TAG = "UserInformation"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,23 +29,39 @@ class UserInformation : AppCompatActivity(), View.OnClickListener {
         tv_withdrawal = findViewById<TextView>(R.id.userInfor_withdrawal)
         tv_logout.setOnClickListener(this)
         tv_withdrawal.setOnClickListener(this)
+
+        if(user != null) {
+            user?.let{
+                name = user.displayName.toString()
+                email = user.email.toString()
+                photoUrl = user.photoUrl.toString()
+                emailVerified = user.isEmailVerified.toString()
+                Log.d("emailVerified", emailVerified)
+            }
+        } else {
+            // No user is signed in
+        }
+
     }
 
     override fun onClick(view: View?) {
         when(view?.id) {
             R.id.userInfor_logout -> {
                 FirebaseAuth.getInstance().signOut()
-                MainActivity.accUserEmail = "noLogin"
-                val myPageFragment = MyPageFragment()
-                val transaction = supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.userInfor_container, myPageFragment)
-                transaction.commit()
+                //MainActivity.accUserEmail = "noLogin"
+                val mainIntent = Intent(this, MainActivity::class.java)
+                mainIntent.putExtra("request_page", "UserInformation_logout")
+                startActivity(mainIntent)
+                finish()
             }
             R.id.userInfor_withdrawal -> {
                 user?.delete()
                     ?.addOnCompleteListener { task ->
                         if(task.isSuccessful) {
                             Log.d(TAG, "User account deleted.")
+                            val mainIntent = Intent(this, MainActivity::class.java)
+                            startActivity(mainIntent)
+                            finish()
                         }
                     }
             }
