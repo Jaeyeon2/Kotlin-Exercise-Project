@@ -1,5 +1,6 @@
 package com.jaeyeon.expeditiouscopyorderapp.ui.myPage
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.jaeyeon.expeditiouscopyorderapp.MainActivity
 import com.jaeyeon.expeditiouscopyorderapp.R
 
 class SignupActivity : AppCompatActivity() {
@@ -17,6 +20,8 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var et_inputEmail: EditText
     private lateinit var et_inputNickname: EditText
     private lateinit var et_inputPassword: EditText
+    var database = FirebaseDatabase.getInstance()
+    val myRef = database.getReference("message")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +80,21 @@ class SignupActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
                             val user = auth.currentUser
+                            var userEmail = user?.email
                             Log.d("회원가입 성공", user?.email)
+                            MainActivity.accUserEmail = userEmail.toString()
+
+                            /*
+                            val myPageFragment = MyPageFragment()
+                            val transaction = supportFragmentManager.beginTransaction()
+                            transaction.replace(R.id.signup_container, myPageFragment)
+                            transaction.commit()
+                             */
+                            val mainIntent = Intent(this, MainActivity::class.java)
+                            mainIntent.putExtra("request_page", "SignupActivity")
+                            startActivity(mainIntent)
+                            finish()
+
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.exception)
                             Toast.makeText(
@@ -85,6 +104,7 @@ class SignupActivity : AppCompatActivity() {
                             Log.d("회원가입 실패", et_inputEmail.text.toString())
                         }
                     }
+                myRef.setValue("Hello, World!")
 
                 return true
             }

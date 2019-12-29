@@ -8,6 +8,7 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -20,8 +21,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.jaeyeon.expeditiouscopyorderapp.ui.myPage.MyPageFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     private lateinit var auth: FirebaseAuth
     internal var REQUIRED_PERMISSIONS = arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
 
@@ -35,8 +37,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        val navView: BottomNavigationView = findViewById(R.id.nav_view) as BottomNavigationView
         val navController = findNavController(R.id.nav_host_fragment)
+        navView.setupWithNavController(navController)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         /*
@@ -47,7 +50,6 @@ class MainActivity : AppCompatActivity() {
         )
          */
         auth = FirebaseAuth.getInstance()
-        navView.setupWithNavController(navController)
         if (!checkLocationServicesStatus()) {
 
             showDialogForLocationServiceSetting()
@@ -55,6 +57,15 @@ class MainActivity : AppCompatActivity() {
             checkRunTimePermission()
         }
         onStart()
+
+        if(getIntent().getStringExtra("request_page") != null)
+        {
+            if(getIntent().getStringExtra("request_page").equals("SignupActivity"))
+            {
+                Log.d("request_page", "SignupActivity")
+                navView.selectedItemId = R.id.navigation_myPage
+            }
+        }
     }
     fun checkLocationServicesStatus(): Boolean {
         val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
@@ -143,5 +154,6 @@ class MainActivity : AppCompatActivity() {
             accUserEmail = "noLogin"
         }
     }
+
 
 }

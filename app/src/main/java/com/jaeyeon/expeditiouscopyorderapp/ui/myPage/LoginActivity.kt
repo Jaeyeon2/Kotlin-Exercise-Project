@@ -24,6 +24,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             R.id.login_goSignup -> {
              val signupIntent = Intent(this, SignupActivity::class.java)
              startActivity(signupIntent)
+                finish()
             }
         }
     }
