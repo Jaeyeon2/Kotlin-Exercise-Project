@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
@@ -22,11 +24,17 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.jaeyeon.expeditiouscopyorderapp.ui.myPage.MyPageFragment
+import java.io.IOException
+import java.util.*
 
 class MainActivity : AppCompatActivity(){
     private lateinit var auth: FirebaseAuth
     val user = FirebaseAuth.getInstance().currentUser
     internal var REQUIRED_PERMISSIONS = arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+    private val MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1001
+    private var gpsTracker: GpsTracker? = null
+    internal var address: String? = null
+
 
     companion object {
         private val LOCATION_PERMISSION_REQUEST_CODE = 1000
@@ -35,6 +43,8 @@ class MainActivity : AppCompatActivity(){
         lateinit var accUserEmail:String
         lateinit var accUserNickname:String
         lateinit var accUserPhotoUrl:String
+        lateinit var accUserLatitude:String  // 위도
+        lateinit var accUserLongitude:String // 경도
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +62,7 @@ class MainActivity : AppCompatActivity(){
             )
         )
          */
+        getUserLocation()
         auth = FirebaseAuth.getInstance()
         if (!checkLocationServicesStatus()) {
 
@@ -172,6 +183,111 @@ class MainActivity : AppCompatActivity(){
             accUserEmail = "noLogin"
         }
     }
+
+    fun getUserLocation() {
+
+        val permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "권한 승인이 필요합니다", Toast.LENGTH_LONG).show()
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                Toast.makeText(this, "현재위 치 메모기능을 사용하기 위해 위치 권한이 필요합니다.", Toast.LENGTH_LONG).show()
+            } else {
+                ActivityCompat.requestPermissions(this,
+                    arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
+                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
+                Toast.makeText(this, "현재 위치 메모기능을 사용하기 위해 위치 권한이 필요합니다.", Toast.LENGTH_LONG).show()
+
+            }
+        }
+        gpsTracker = GpsTracker(this@MainActivity)
+
+        val latitude = gpsTracker!!.getLatitude()
+        val longitude = gpsTracker!!.getLongitude()
+        accUserLatitude = latitude.toString()
+        accUserLongitude = longitude.toString()
+        Log.d("latitudezzz", latitude.toString())
+        address = getCurrentAddress(latitude, longitude)
+        val str_address = address!!.split(" ")
+        address = ""
+        for (i in 1 until str_address.size) {
+            address = address + str_address[i] + " "
+
+            if (i == str_address.size - 1) {
+                if (address!!.equals("미발견 ")) {
+                    if (!checkLocationServicesStatus()) {
+                        val builder = AlertDialog.Builder(this@MainActivity)
+                        builder.setTitle("위치 서비스 비활성화")
+                        builder.setMessage("해당 서비스를 이용하기 위해선 위치권한이 필요합니다..\n" + "위치 설정을 수정하실래요?")
+                        builder.setCancelable(true)
+                        builder.setPositiveButton("설정", object : DialogInterface.OnClickListener {
+                            @Override
+                            override fun onClick(dialog: DialogInterface, id: Int) {
+                                val callGPSSettingIntent = Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                                startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE)
+                            }
+                        })
+                        builder.setNegativeButton("취소", object : DialogInterface.OnClickListener {
+                            @Override
+                            override fun onClick(dialog: DialogInterface, id: Int) {
+                                dialog.cancel()
+                            }
+                        })
+                        builder.create().show()
+                    } else {
+                        Log.d("address111", address)
+                        val builder = AlertDialog.Builder(this)
+                        builder.setTitle("주소 미발견")
+                        builder.setMessage("현재 위치를 불러오는데 실패하였습니다. ")
+                        builder.setPositiveButton("확인",
+                            object : DialogInterface.OnClickListener {
+                                override fun onClick(dialog: DialogInterface, which: Int) {
+
+                                }
+                            })
+                        builder.show()
+
+                        checkRunTimePermission()
+                    }
+                } else {
+                    Log.d("address11", address)
+                }
+            }
+        }
+
+    }
+    fun getCurrentAddress(latitude: Double, longitude: Double): String {
+
+        //지오코더... GPS를 주소로 변환
+        val geocoder = Geocoder(this, Locale.getDefault())
+        val addresses: List<Address>?
+        try {
+            addresses = geocoder.getFromLocation(
+                latitude,
+                longitude,
+                7)
+        } catch (ioException: IOException) {
+            //네트워크 문제
+            Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show()
+            return "지오코더 서비스 사용불가"
+        } catch (illegalArgumentException: IllegalArgumentException) {
+            Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show()
+            return "잘못된 GPS 좌표"
+
+        }
+
+
+
+        if (addresses == null || addresses.size === 0) {
+            return "주소 미발견"
+
+        }
+
+        val address = addresses!![0]
+        return address.getAddressLine(0).toString() + "\n"
+    }
+
 
 
 }

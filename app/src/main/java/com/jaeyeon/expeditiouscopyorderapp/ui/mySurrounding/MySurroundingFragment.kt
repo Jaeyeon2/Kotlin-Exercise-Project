@@ -16,11 +16,10 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.jaeyeon.expeditiouscopyorderapp.MainActivity
 import com.jaeyeon.expeditiouscopyorderapp.R
-import com.naver.maps.map.LocationTrackingMode
-import com.naver.maps.map.MapFragment
-import com.naver.maps.map.NaverMap
-import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.*
 import com.naver.maps.map.util.FusedLocationSource
 
 class MySurroundingFragment : Fragment(), OnMapReadyCallback {
@@ -67,6 +66,12 @@ class MySurroundingFragment : Fragment(), OnMapReadyCallback {
         uiSettings.isCompassEnabled = false
         naverMap.locationSource = locationSource
         naverMap.locationTrackingMode = LocationTrackingMode.Face
+        val userLatitude = MainActivity.accUserLatitude.toDouble()
+        val userLongitude = MainActivity.accUserLongitude.toDouble()
+
+        val earlyCameraPosition = CameraPosition(LatLng(userLatitude, userLongitude), 14.0)
+        val earlyCameraUpdate = CameraUpdate.toCameraPosition(earlyCameraPosition)
+        naverMap.moveCamera(earlyCameraUpdate)
 
     }
 
