@@ -1,6 +1,7 @@
 package com.jaeyeon.expeditiouscopyorderapp.ui.myPage
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.FirebaseDatabase
 import com.jaeyeon.expeditiouscopyorderapp.MainActivity
 import com.jaeyeon.expeditiouscopyorderapp.R
@@ -81,6 +83,19 @@ class SignupActivity : AppCompatActivity() {
                             // Sign in success, update UI with the signed-in user's information
                             val user = auth.currentUser
                             var userEmail = user?.email
+                            var userNickname = et_inputNickname.text.toString()
+                            var userDefaultUrl = "https://firebasestorage.googleapis.com/v0/b/print-order-service.appspot.com/o/default_profile_image.png?alt=media&token=8a8d45da-1ed5-484a-8346-cbcc697b42cf"
+                            val profileUpdates = UserProfileChangeRequest.Builder()
+                                .setDisplayName(userNickname)
+                                .setPhotoUri(Uri.parse(userDefaultUrl))
+                                .build()
+
+                            user?.updateProfile(profileUpdates)
+                                ?.addOnCompleteListener { task ->
+                                    if(task.isSuccessful) {
+                                        Log.d(TAG, "User profile updated")
+                                    }
+                                }
                             Log.d("회원가입 성공", user?.email)
                             MainActivity.accUserEmail = userEmail.toString()
 

@@ -25,13 +25,16 @@ import com.jaeyeon.expeditiouscopyorderapp.ui.myPage.MyPageFragment
 
 class MainActivity : AppCompatActivity(){
     private lateinit var auth: FirebaseAuth
+    val user = FirebaseAuth.getInstance().currentUser
     internal var REQUIRED_PERMISSIONS = arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
 
     companion object {
         private val LOCATION_PERMISSION_REQUEST_CODE = 1000
         private val GPS_ENABLE_REQUEST_CODE = 2001
         private val PERMISSIONS_REQUEST_CODE = 100
-        var accUserEmail = ""
+        lateinit var accUserEmail:String
+        lateinit var accUserNickname:String
+        lateinit var accUserPhotoUrl:String
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +70,19 @@ class MainActivity : AppCompatActivity(){
             } else if(getIntent().getStringExtra("request_page").equals("UserInformation_logout"))
             {
                 navView.selectedItemId = R.id.navigation_myPage
+            } else if(getIntent().getStringExtra("request_page").equals("LoginActivity_loginSuccess"))
+            {
+                navView.selectedItemId = R.id.navigation_myPage
             }
+
+        }
+
+        user?.let {
+            // Name, email address, and profile photo Url
+            accUserNickname = user.displayName.toString()
+            accUserPhotoUrl = user.photoUrl.toString()
+            val emailVerified = user.isEmailVerified
+            val uid = user.uid
         }
     }
     fun checkLocationServicesStatus(): Boolean {

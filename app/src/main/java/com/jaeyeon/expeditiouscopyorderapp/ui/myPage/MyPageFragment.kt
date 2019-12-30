@@ -3,6 +3,7 @@ package com.jaeyeon.expeditiouscopyorderapp.ui.myPage
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.jaeyeon.expeditiouscopyorderapp.MainActivity
+import com.jaeyeon.expeditiouscopyorderapp.MainActivity.Companion.accUserNickname
 import com.jaeyeon.expeditiouscopyorderapp.R
 import kotlinx.android.synthetic.main.fragment_my_page.*
 
@@ -41,6 +43,8 @@ class MyPageFragment : Fragment() {
                 startActivity(loginIntent)
             }
         } else {
+            tv_userNickname.setText(MainActivity.accUserNickname)
+            Log.d("accUserNickname22", accUserNickname)
             ll_userInfor.setOnClickListener {
                 val userInforIntent = Intent(context, UserInformation::class.java)
                 startActivity(userInforIntent)
